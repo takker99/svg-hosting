@@ -1,5 +1,11 @@
 {
     "functions": {
         "api/**/*.[jt]s": { "runtime": "vercel-deno@0.7.6" }
+    },
+  "routes": [
+    {
+      "src": "/scrapbox.io/(.+)",
+      "dest": "api/svg?url=https://scrapbox.io/api/code/$1"
     }
+  ]
 }
