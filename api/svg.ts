@@ -23,6 +23,7 @@ export default async (req: ServerRequest) => {
 
 async function fetchSVGText(url: string) {
   const response = await fetch(url);
+    console.log(response);
 
   if (!response.ok) {
     throw new Error("Image response is not OK");
