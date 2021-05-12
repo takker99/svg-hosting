@@ -1,9 +1,11 @@
 import { ServerRequest } from "https://deno.land/std/http/server.ts";
 
 export default async (req: ServerRequest) => {
-  const base = `${req.headers.get("x-forwarded-proto")}://${req.headers.get(
-    "x-forwarded-host"
-  )}`;
+  const base = `${req.headers.get("x-forwarded-proto")}://${
+    req.headers.get(
+      "x-forwarded-host",
+    )
+  }`;
   const url = new URL(req.url, base);
   // svgのURLを取得する
   const params = url.searchParams;
@@ -23,7 +25,7 @@ export default async (req: ServerRequest) => {
 
 async function fetchSVGText(url: string) {
   const response = await fetch(url);
-    console.log(response);
+  console.log(response);
 
   if (!response.ok) {
     throw new Error("Image response is not OK");
