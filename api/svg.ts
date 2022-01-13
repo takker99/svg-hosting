@@ -1,4 +1,4 @@
-import { ServerRequest } from "https://deno.land/std/http/server.ts";
+import { ServerRequest } from "https://deno.land/std@0.105.0/http/server.ts";
 
 export default async (req: ServerRequest) => {
   const base = `${req.headers.get("x-forwarded-proto")}://${
@@ -25,7 +25,6 @@ export default async (req: ServerRequest) => {
 
 async function fetchSVGText(url: string) {
   const response = await fetch(url);
-  console.log(response);
 
   if (!response.ok) {
     throw new Error("Image response is not OK");
@@ -39,7 +38,7 @@ async function fetchSVGText(url: string) {
 function respondSVG(body: string, req: ServerRequest) {
   const headers = new Headers();
   headers.set("Content-Type", "image/svg+xml; charaset=utf-8");
-  headers.set("Cache-Control", `private, max-age=${60 * 60 * 24}`);
+  headers.set("Cache-Control", "no-cache, max-age=0");
   req.respond({
     headers,
     body: body,
