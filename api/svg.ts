@@ -39,7 +39,7 @@ async function fetchSVGText(url: string) {
 function respondSVG(body: string, req: ServerRequest) {
   const headers = new Headers();
   headers.set("Content-Type", "image/svg+xml; charaset=utf-8");
-  headers.set("Cache-Control", `private, max-age=${60 * 60 * 24}`);
+  headers.set("Cache-Control", "no-cache, max-age=0");
   req.respond({
     headers,
     body: body,
