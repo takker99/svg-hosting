@@ -14,6 +14,10 @@ export default async (req: ServerRequest) => {
     req.respond({ status: 400, body: "No svg URL found." });
     return;
   }
+  if (new URL(svgURL).hostname === url.hostname) {
+    req.respond({ status: 400, body: "Recursive URL is forbidden." });
+    return;
+  }
   let svgBody = "";
   try {
     svgBody = await fetchSVGText(svgURL);
